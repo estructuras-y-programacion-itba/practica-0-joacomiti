@@ -120,3 +120,56 @@ def turno():
         print(f"Tirada {nro_tirada}:", dados)
 
     return dados
+
+CATEGORIAS = ["E","F","P","G","1","2","3","4","5","6"]
+def crear_planilla():
+    planilla = {}
+    for c in CATEGORIAS:
+        planilla[c] = None
+    return planilla
+planilla_j1 = crear_planilla()
+planilla_j2 = crear_planilla()
+
+def categorias_disponibles(planilla):
+    disp = []
+    for c in planilla:
+        if planilla[c] is None:
+            disp.append(c)
+    return disp
+
+def pedir_categoria(planilla):
+    disp = categorias_disponibles(planilla)
+    print("Categorías disponibles:", disp)
+
+    while True:
+        c = input("Elegí categoría: ").upper()
+        if c in disp:
+            return c
+        print("Categoría inválida o ya usada.")
+        
+def calcular_puntaje(dados, categoria):
+    
+    # Categorías numéricas (1 al 6)
+    if categoria in ["1","2","3","4","5","6"]:
+        return puntaje_numero(dados, int(categoria))
+
+    # Categorías especiales
+    resultado = jugada(dados)
+
+    if categoria == "E" and resultado == "Escalera":
+        return 20
+
+    if categoria == "F" and resultado == "Full":
+        return 30
+
+    if categoria == "P" and resultado == "Poker":
+        return 40
+
+    if categoria == "G" and resultado == "Generala":
+        return 50
+
+    # Si eligió una categoría pero no coincide, anota 0
+    return 0
+        
+def anotar_puntaje(planilla, categoria, puntos):
+    planilla[categoria] = puntos
