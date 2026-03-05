@@ -5,7 +5,7 @@ def hola_mundo():
 
 def main():
     # Aqui ejecutas tus soluciones
-    print(hola_mundo())
+    print(chau_mundo())
 
 
 # No cambiar a partir de aqui
