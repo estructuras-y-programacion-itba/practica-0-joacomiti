@@ -197,8 +197,8 @@ def planilla_completa(planilla): #RECORRE LA PLANILLA Y SE FIJA SI ESTA COMPLETA
             return False
     return True
 
-def planilla_completa(planilla): #suma todos los puntajes
+def total_puntos(planilla):
+    total = 0
     for categoria in planilla:
-        if planilla[categoria] is None:
-            return False
-    return True
+        total += planilla[categoria]
+    return total
