@@ -173,3 +173,32 @@ def calcular_puntaje(dados, categoria):
         
 def anotar_puntaje(planilla, categoria, puntos):
     planilla[categoria] = puntos
+    
+def turno_jugador(planilla, nombre):
+    print("\nTurno de", nombre)
+
+    dados = turno()
+    print("Dados finales:", dados)
+
+    resultado = jugada(dados)
+    print("Jugada obtenida:", resultado)
+
+    categoria = pedir_categoria(planilla)
+    puntos = calcular_puntaje(dados, categoria)
+
+    anotar_puntaje(planilla, categoria, puntos)
+
+    print("Se anotaron", puntos, "puntos en la categoría", categoria)
+    print("Planilla actual:", planilla)
+    
+def planilla_completa(planilla): #RECORRE LA PLANILLA Y SE FIJA SI ESTA COMPLETA O NO
+    for categoria in planilla:
+        if planilla[categoria] is None:
+            return False
+    return True
+
+def planilla_completa(planilla): #suma todos los puntajes
+    for categoria in planilla:
+        if planilla[categoria] is None:
+            return False
+    return True
