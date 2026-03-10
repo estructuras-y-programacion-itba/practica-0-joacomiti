@@ -1,10 +1,4 @@
-#EJERCICIO GENERALA 
-
-def main():
-    print("Hola, generala!")
-if __name__ == "__main__":
-    main()
-    
+#EJERCICIO GENERALA     
 import random
 def tirar_dados(cantidad_dados):
     dados= []
@@ -202,3 +196,29 @@ def total_puntos(planilla):
     for categoria in planilla:
         total += planilla[categoria]
     return total
+
+def main():
+    planilla_j1 = crear_planilla()
+    planilla_j2 = crear_planilla()
+
+    while not planilla_completa(planilla_j1) or not planilla_completa(planilla_j2):
+
+        if not planilla_completa(planilla_j1):
+            turno_jugador(planilla_j1, "Jugador 1")
+
+        if not planilla_completa(planilla_j2):
+            turno_jugador(planilla_j2, "Jugador 2")
+
+    total_j1 = total_puntos(planilla_j1)
+    total_j2 = total_puntos(planilla_j2)
+
+    print("\n--- FIN DEL JUEGO ---")
+    print("Puntaje total Jugador 1:", total_j1)
+    print("Puntaje total Jugador 2:", total_j2)
+
+    if total_j1 > total_j2:
+        print("Ganó Jugador 1")
+    elif total_j2 > total_j1:
+        print("Ganó Jugador 2")
+    else:
+        print("Empate")
