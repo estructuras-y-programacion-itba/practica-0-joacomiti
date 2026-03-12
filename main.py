@@ -145,28 +145,32 @@ def pedir_categoria(planilla):
             return c
         print("Categoría inválida o ya usada.")
         
-def calcular_puntaje(dados, categoria):
+def calcular_puntaje(dados, categoria, nro_tirada_final):
     
     # Categorías numéricas (1 al 6)
     if categoria in ["1","2","3","4","5","6"]:
         return puntaje_numero(dados, int(categoria))
 
-    # Categorías especiales
     resultado = jugada(dados)
 
     if categoria == "E" and resultado == "Escalera":
+        if nro_tirada_final == 1:
+            return 25
         return 20
 
     if categoria == "F" and resultado == "Full":
+        if nro_tirada_final == 1:
+            return 35
         return 30
 
     if categoria == "P" and resultado == "Poker":
+        if nro_tirada_final == 1:
+            return 45
         return 40
 
     if categoria == "G" and resultado == "Generala":
         return 50
-
-    # Si eligió una categoría pero no coincide, anota 0
+    
     return 0
         
 def anotar_puntaje(planilla, categoria, puntos):
