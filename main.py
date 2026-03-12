@@ -101,19 +101,25 @@ def pedir_indices_a_retirar():
 
                 return indices
 
+
 def turno():
     dados = tirar_dados(5)
     print("Tirada 1:", dados)
 
-    # si el jugador no quiere re-tirar, termina
-    for nro_tirada in range(2, 4):  # 2 y 3
+    nro_tirada_final = 1
+
+    for nro_tirada in range(2, 4):
         indices = pedir_indices_a_retirar()
+
         if len(indices) == 0:
             break
+
         dados = reroll(dados, indices)
         print(f"Tirada {nro_tirada}:", dados)
 
-    return dados
+        nro_tirada_final = nro_tirada
+
+    return dados, nro_tirada_final
 
 CATEGORIAS = ["E","F","P","G","1","2","3","4","5","6"]
 def crear_planilla():
@@ -121,8 +127,6 @@ def crear_planilla():
     for c in CATEGORIAS:
         planilla[c] = None
     return planilla
-planilla_j1 = crear_planilla()
-planilla_j2 = crear_planilla()
 
 def categorias_disponibles(planilla):
     disp = []
@@ -168,11 +172,13 @@ def calcular_puntaje(dados, categoria):
 def anotar_puntaje(planilla, categoria, puntos):
     planilla[categoria] = puntos
     
+
 def turno_jugador(planilla, nombre):
     print("\nTurno de", nombre)
 
-    dados = turno()
+    dados, nro_tirada_final = turno()
     print("Dados finales:", dados)
+    print("Terminó en la tirada:", nro_tirada_final)
 
     resultado = jugada(dados)
     print("Jugada obtenida:", resultado)
@@ -222,3 +228,7 @@ def main():
         print("Ganó Jugador 2")
     else:
         print("Empate")
+        
+        
+if __name__ == "__main__":
+    main()
