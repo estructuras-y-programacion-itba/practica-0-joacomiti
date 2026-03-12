@@ -186,14 +186,22 @@ def turno_jugador(planilla, nombre):
 
     resultado = jugada(dados)
     print("Jugada obtenida:", resultado)
+    
+    if resultado == "Generala" and nro_tirada_final == 1:
+        anotar_puntaje(planilla, "G", 80)
+        print("GENERALA REAL")
+        print(nombre, "gana automáticamente")
+        print("Planilla actual:", planilla)
+        return True
 
     categoria = pedir_categoria(planilla)
-    puntos = calcular_puntaje(dados, categoria)
+    puntos = calcular_puntaje(dados, categoria, nro_tirada_final)
 
     anotar_puntaje(planilla, categoria, puntos)
 
     print("Se anotaron", puntos, "puntos en la categoría", categoria)
     print("Planilla actual:", planilla)
+    return False
     
 def planilla_completa(planilla): #RECORRE LA PLANILLA Y SE FIJA SI ESTA COMPLETA O NO
     for categoria in planilla:
@@ -211,13 +219,17 @@ def main():
     planilla_j1 = crear_planilla()
     planilla_j2 = crear_planilla()
 
-    while not planilla_completa(planilla_j1) or not planilla_completa(planilla_j2):
+    while not (planilla_completa(planilla_j1) and planilla_completa(planilla_j2)):
 
         if not planilla_completa(planilla_j1):
-            turno_jugador(planilla_j1, "Jugador 1")
+            generala_real = turno_jugador(planilla_j1, "Jugador 1")
+            if generala_real:
+                return
 
         if not planilla_completa(planilla_j2):
-            turno_jugador(planilla_j2, "Jugador 2")
+            generala_real = turno_jugador(planilla_j2, "Jugador 2")
+            if generala_real:
+                return
 
     total_j1 = total_puntos(planilla_j1)
     total_j2 = total_puntos(planilla_j2)
