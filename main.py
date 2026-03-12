@@ -244,11 +244,13 @@ def main():
 
         if not planilla_completa(planilla_j1):
             generala_real = turno_jugador(planilla_j1, "Jugador 1")
+            guardar_csv(planilla_j1, planilla_j2)
             if generala_real:
                 return
 
         if not planilla_completa(planilla_j2):
             generala_real = turno_jugador(planilla_j2, "Jugador 2")
+            guardar_csv(planilla_j1, planilla_j2)
             if generala_real:
                 return
 
