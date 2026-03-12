@@ -1,5 +1,7 @@
 #EJERCICIO GENERALA     
 import random
+import csv
+
 def tirar_dados(cantidad_dados):
     dados= []
     for i in range(cantidad_dados):
@@ -214,6 +216,25 @@ def total_puntos(planilla):
     for categoria in planilla:
         total += planilla[categoria]
     return total
+
+def guardar_csv(planilla_j1, planilla_j2):
+    archivo = open("jugadas.csv", "w")
+
+    archivo.write("jugada,j1,j2\n")
+
+    for c in CATEGORIAS:
+        p1 = planilla_j1[c]
+        p2 = planilla_j2[c]
+
+        if p1 is None:
+            p1 = 0
+        if p2 is None:
+            p2 = 0
+
+        linea = c + "," + str(p1) + "," + str(p2) + "\n"
+        archivo.write(linea)
+
+    archivo.close()
 
 def main():
     planilla_j1 = crear_planilla()
